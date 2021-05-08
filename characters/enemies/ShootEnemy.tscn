@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://characters/enemies/Ennemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/enemies/sprites/ships/Red_Frame_1.png" type="Texture" id=2]
+[ext_resource path="res://characters/enemies/ShootEnemy.gd" type="Script" id=3]
+[ext_resource path="res://characters/enemies/sprites/ships/Red_Frame_2.png" type="Texture" id=4]
+[ext_resource path="res://characters/enemies/sprites/ships/Red_Frame_3.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.3049, 24.1877 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "SETUP"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
+}
+
+[node name="Area2D" instance=ExtResource( 1 )]
+position = Vector2( 128.211, 93.5255 )
+script = ExtResource( 3 )
+velocity = Vector2( 100, 50 )
+hp = 4
+score = 200
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="CoolDown" type="Timer" parent="." index="3"]
+wait_time = 0.4
+
+[node name="Cannon" type="Position2D" parent="." index="4"]
+position = Vector2( 0, 24.5205 )
+
+[node name="Animation" type="AnimationPlayer" parent="." index="5"]
+anims/SETUP = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/move = SubResource( 4 )
+
+[node name="RayCast" type="RayCast2D" parent="." index="6"]
+enabled = true
+cast_to = Vector2( 0, 1000 )

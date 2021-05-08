@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://characters/enemies/Ennemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/enemies/sprites/Asteroid 02.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.37392, 8.93356 )
+
+[node name="Area2D" instance=ExtResource( 1 )]
+velocity = Vector2( 0, 500 )
+rotate = true
+hp = 1
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -1.7028, 3.06506 )
+shape = SubResource( 1 )

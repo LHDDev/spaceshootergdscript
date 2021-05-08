@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://characters/enemies/enemy_blaster.gd" type="Script" id=1]
+[ext_resource path="res://characters/player/Blaster.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Laser_Medium.png-4182107b3f007b959ecd34afd287ea69.stex"
+
+[node name="Area2D" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+velocity = Vector2( 0, 250 )
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 1, 0, 0, 1 )
+texture = SubResource( 1 )

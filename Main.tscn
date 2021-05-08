@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://particules/closestarsparticules.tres" type="Material" id=3]
+[ext_resource path="res://particules/farstarsparticules.tres" type="Material" id=4]
+[ext_resource path="res://characters/enemies/Spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Main.gd" type="Script" id=6]
+[ext_resource path="res://Camera.gd" type="Script" id=7]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 7 )
+
+[node name="BackGround" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="CloseStars" type="Particles2D" parent="BackGround"]
+position = Vector2( 360, -50 )
+amount = 50
+lifetime = 10.0
+preprocess = 100.0
+speed_scale = 4.0
+randomness = 1.0
+fixed_fps = 60
+draw_order = 1
+process_material = ExtResource( 3 )
+
+[node name="FarStars" type="Particles2D" parent="BackGround"]
+position = Vector2( 360, -50 )
+amount = 50
+lifetime = 10.0
+preprocess = 100.0
+speed_scale = 2.0
+randomness = 1.0
+draw_order = 1
+process_material = ExtResource( 4 )
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]
+pause_mode = 2
+offset = Vector2( 0, 920 )
+transform = Transform2D( 1, 0, 0, 1, 0, 920 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Spawner" parent="." instance=ExtResource( 5 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+bus = "music"
